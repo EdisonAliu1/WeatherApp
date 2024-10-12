@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather App</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background: linear-gradient(to right, #6a11cb, #2575fc);
+            color: white;
+        }
+        .weather-card {
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 15px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+        h1 {
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+        }
+        .alert {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1 class="mt-5 text-center">Weather App</h1>
+    <form th:action="@{/weather}" method="get" class="mt-4">
+        <div class="form-group">
+            <label for="city">Enter City:</label>
+            <input type="text" id="city" name="city" class="form-control" required>
+        </div>
+        <button type="submit" class="btn btn-light btn-block">Get Weather</button>
+    </form>
+
+    <div th:if="${city}" class="weather-card">
+        <h2 class="text-center">Weather in <span th:text="${city}">City</span>, <span th:text="${country}">Country</span></h2>
+        <p class="text-center">Condition: <span th:text="${weatherDescription}">Description</span></p>
+        <h3 class="text-center">Temperature: <span th:text="${temperature}">Temperature</span> °C</h3>
+        <p class="text-center">Humidity: <span th:text="${humidity}">Humidity</span>%</p>
+        <p class="text-center">Wind Speed: <span th:text="${windSpeed}">Wind Speed</span> m/s</p>
+    </div>
+
+    <div th:if="${error}" class="alert alert-danger text-center">
+        <span th:text="${error}">Error message</span>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
